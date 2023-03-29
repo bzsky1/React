@@ -1,24 +1,16 @@
-import React, {useState} from "react";
+import React from 'react';
+import FunctionalCounter from './components/FunctionalCounter'
+import ClassCounter from './components/ClassCounter'
+
 
 function App() {
-  const [count, setCount] = useState(5)
-
-  const increment = () => {
-    setCount(count + 1)
-  }
-
-  const decrement = () => {
-    setCount(count - 1)
-  }
-
 
   return (
     <div className="App">
-        <h1>{count}</h1>
-      <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>Decrement</button>
+      <FunctionalCounter/>
+      <ClassCounter/>
     </div>
-  );
+  )
 }
 
 export default App;

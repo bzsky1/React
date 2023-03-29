@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@700;400&display=swap');
+
+
+body {
+    background-color: #eef0a8;
+    font-family: 'Passion One', cursive;
+}
+
+
+button {
+    padding: 5px 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+    transition: all 0.7s ease;
+    background-color: white;
+    font-family: 'Passion One', cursive;
+
+}
+
+
+h4 {
+    color: rgb(72, 9, 150);
+    font-size: 18px;
+    margin-top: 0;
+    font-weight: 700;
+}
+
+
+h1 {
+    font-weight: 700;
+}
+
+
+button:hover {
+    cursor: pointer;
+    background-color: green;
+}
+
+
+.decbtn:hover {
+    background-color: red;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 190px;
+}
+
+
+#root {
+    width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+.App {
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.class, .func {
+    background-color: rgb(240, 220, 0);
+    padding: 80px 40px;
+    border: 2px solid black;
+    border-radius: 20px;
+}
