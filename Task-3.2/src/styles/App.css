@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #ffd4fb;
+}
+
+
+#root {
+    padding-top: 100px;
+}
+
+
+.App {
+    width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+
+.app-body {
+    color: black;
+    border-radius: 30px;
+    width: 300px;
+    height: 100px;
+    padding: 20% 10px 0px 10px;
+    border: 2px solid transparent;
+    transition: all 1s ease;
+}
+
+
+.app-body:hover {
+    color: white;
+    background-color: #9f00a5;
+    border-radius: 30px;
+    width: 300px;
+    height: 100px;
+    padding: 80px 10px 80px 10px;
+    border: 2px solid black;
+}
+
+
+.app-body:hover button {
+    margin-top: 50px;
+    margin-right: 20px;
+}
+
+
+.app-body:hover .buttons {
+    margin-left: 20px;
+}
+
+
+.buttons {
+    transition: all 1s ease;
+}

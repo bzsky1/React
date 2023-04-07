@@ -1,0 +1,19 @@
+.myBtn {
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 1s ease;
+
+}
+
+.myBtn:hover {
+    padding: 5px 15px;
+    color: violet;
+    font-size: 14px;
+    border: 1px solid violet;
+    cursor: pointer;
+    background: white;
+    border-radius: 10px;
+}
