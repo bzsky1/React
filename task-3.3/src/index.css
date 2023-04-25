@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Reenie+Beanie&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mali:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Reenie Beanie', cursive;
+  transition: all 0.5s ease;
+
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  transition: all 0.3s ease;
+}
+
+.header {
+  height: 100px;
+  background-color: #fff2a0;
+  border-bottom: 3px solid rgb(202, 202, 202);
+}
+
+.header a:hover {
+  text-shadow: 0px 0px 4px rgb(49, 169, 176);
+}
+
+.header__nav {
+  position: relative;
+  top: 35px;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 32px;
+}
+
+#error-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* _______________________________________________________________ */
+/* index */
+
+
+
+/* _______________________________________________________________ */
+/* posts */
+
+.posts {
+  font-family: 'Mali', cursive;
+  text-align: center;
+}
+
+.container {
+  padding-top: 50px;
+  width: 800px;
+  margin: 0 auto;
+
+}
+
+.post {
+  text-align: left;
+  display: flex;
+  border: 2px solid;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+
+.post__pic {
+  margin-right: 20px;
+}
+
+.post__pic img {
+  /* height: 150px; */
+  width: 140px;
+}
+
+.post__main {
+  display: flex;
+  flex-direction: column;
+}
+
+.post__title {
+  font-size: 30px;
+  margin-bottom: 10px;
+
+}
+
+.post__sub {
+  font-size: 11px;
+  margin-bottom: 10px;
+}
+
+.post__text {
+  font-size: 14px;
+}
+
+.buttons {
+  align-self: center;
+  margin-top: 20px;
+  margin-right: 135px;
+}
+
+.buttons button {
+  width: 65px;
+}
+
+.posts button {
+  font-family: 'Mali', cursive;
+  background-color: inherit;
+  padding: 6px 8px;
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.open-button:hover, .new-post__button:hover {
+  background-color: #9eff95;
+}
+
+.edit-button {
+  margin-right: 30px;
+}
+
+.edit-button:hover {
+  background-color: #fff2a0;
+}
+
+.delete-button:hover {
+  background-color: #ff5f5f;
+}
+
+.new-post__button {
+  margin-bottom: 40px;
+  font-size: 18px;
+}
+
+.noposts {
+  margin-top: 100px;
+}
