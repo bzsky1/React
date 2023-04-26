@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import './index.css'
 import ErrorPage from "./error-page"
-import Root from './routes/root'
+import Root from './routes/Root'
 import Posts, { loader as postsLoader, action as postsAction } from './routes/PostsList/Posts'
 import Index from './routes'
 import Todos, { loader as todosLoader, action as todosAction} from './routes/TodoList/Todos'
