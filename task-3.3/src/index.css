@@ -44,15 +44,24 @@ a {
   width: 100%;
 }
 
+
 /* _______________________________________________________________ */
 /* index */
 
-
+.index {
+  height: 60vh;
+  display: flex;
+  font-size: 30px;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 200px; */
+  text-shadow: 3px 3px 5px rgb(93, 93, 93);
+}
 
 /* _______________________________________________________________ */
 /* posts */
 
-.posts {
+.posts, .todos {
   font-family: 'Mali', cursive;
   text-align: center;
 }
@@ -67,10 +76,13 @@ a {
 .post {
   text-align: left;
   display: flex;
-  border: 2px solid;
+  border-left: 1px solid;
   align-items: center;
   padding: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
+  border-right: 1px solid;
+
+
 }
 
 
@@ -106,14 +118,14 @@ a {
 .buttons {
   align-self: center;
   margin-top: 20px;
-  margin-right: 135px;
+  margin-right: 150px;
 }
 
 .buttons button {
   width: 65px;
 }
 
-.posts button {
+.posts button,.todos button {
   font-family: 'Mali', cursive;
   background-color: inherit;
   padding: 6px 8px;
@@ -121,27 +133,57 @@ a {
   cursor: pointer;
 }
 
-.open-button:hover, .new-post__button:hover {
+.open-button:hover, .new-post__button:hover, .new-todo__button:hover {
   background-color: #9eff95;
 }
 
 .edit-button {
-  margin-right: 30px;
+  margin: 0 30px;
 }
 
-.edit-button:hover {
+.edit-button:hover, .todo-item__edit-btn:hover {
   background-color: #fff2a0;
 }
 
-.delete-button:hover {
+.delete-button:hover, .todo-item__delete-btn:hover {
   background-color: #ff5f5f;
 }
 
-.new-post__button {
+.new-post__button, .new-todo__button {
   margin-bottom: 40px;
   font-size: 18px;
 }
 
 .noposts {
   margin-top: 100px;
+}
+
+/* _______________________________________________________________ */
+/* todos */
+
+.todo-item__text {
+  font-size: 20px;
+  margin-bottom: 5px;
+  /* text-decoration: underline; */
+  border-bottom: 1px solid;
+}
+
+.todo-item__edit-btn {
+  margin-right: 10px;
+}
+
+.todo-item__buttons button {
+  font-size: 12px;
+}
+
+.todo-item {
+  margin-bottom: 50px;
+  width: 400px;
+  align-self: center;
+  justify-self: center;
+}
+
+.todos__list {
+  display: flex;
+  flex-direction: column;
 }
