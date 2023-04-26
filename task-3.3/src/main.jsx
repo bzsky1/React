@@ -10,6 +10,7 @@ import Root from './routes/root'
 import Posts, { loader as postsLoader, action as postsAction } from './routes/PostsList/posts'
 import Index from './routes'
 import Todos, { loader as todosLoader, action as todosAction} from './routes/TodoList/Todos'
+import Users, { loader as usersLoader, action as usersAction } from './routes/UserList/Users'
 
  
 const router = createBrowserRouter([
@@ -34,7 +35,13 @@ const router = createBrowserRouter([
         element: <Todos />,
         loader: todosLoader,
         action: todosAction,
-      }
+      },
+      {
+        path: 'users',
+        element: <Users />,
+        loader: usersLoader,
+        action: usersAction,
+      },
     ],
   },
 ]);

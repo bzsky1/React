@@ -9,7 +9,7 @@ export default function Root() {
           <nav className="header__nav">
             <Link to={`posts`}>Posts List</Link>
             <Link to={`todos`}>Todo List</Link>
-            <Link to={``}>User List</Link>
+            <Link to={`users`}>User List</Link>
           </nav>
         </header>
         <div className="main">
