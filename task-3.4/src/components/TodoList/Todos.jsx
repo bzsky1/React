@@ -1,4 +1,4 @@
-import { useLoaderData, Form } from "react-router-dom";
+import { useLoaderData, Form, Outlet, Link } from "react-router-dom";
 import { createTodo, getTodos } from "../../todos";
 
 export async function loader() {
@@ -27,8 +27,14 @@ export default function Todos() {
                                 <div className="todo-item" key={ todo.id }>
                                     <div className="todo-item__text">{ todo.title }</div>
                                     <div className="todo-item__buttons">
-                                        <button className="todo-item__edit-btn">Edit</button>
-                                        <button className="todo-item__delete-btn">Delee</button>
+                                        <Link to={`${todo.id}/edit`}>
+                                            <button className="todo-item__edit-btn"
+                                            onClick={() => {
+                                                document.querySelector('.edit-todo-outlet').classList.add('edit-todo-active')
+                                            }}
+                                            >Edit</button>
+                                        </Link>
+                                        <Form method="post" action={`${todo.id}/delete`}><button className="todo-item__delete-btn">Delee</button></Form>
                                     </div>
                                 </div>
                         )
@@ -39,6 +45,9 @@ export default function Todos() {
                     </p>
                 )}
                 </div>
+            </div>
+            <div className="edit-todo-outlet">
+                <Outlet />
             </div>
         </div>
     )

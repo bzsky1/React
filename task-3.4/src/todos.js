@@ -12,29 +12,68 @@ const fetchData = async () => {
     const todos = await res.json()
     const shortTodos = todos.splice(0, 11)
     shortTodos.map((todo) => {
+        delete todo.userId
+        delete todo.completed
+        todo.createdAt = Date.now()
         todo.title = bigFirstLetter(todo.title.slice(0, 30))
     })
     return shortTodos
 }
 
 export async function getTodos(query) {
-    let todos = await fetchData()
-    if (!todos) todos = []
-    if (query) {
-        todos = matchSorter(todos, query)
+    let todos = await JSON.parse(localStorage.getItem('todos'))
+    if (todos === null) {
+        let todos = await fetchData()
+        if (!todos) todos = []
+        if (query) {
+            todos = matchSorter(todos, query)
+        }
+        set(todos)
     }
-    set(todos)
-    return todos.sort(sortBy('createdAt'))
+    return todos.sort((a, b) => {
+        return b.createdAt - a.createdAt
+    })
 }
 
 export async function createTodo() {
     let id = Math.random().toString(36).substring(3,9)
     let title = 'Random Todo'
     let todo = { id, createdAt: Date.now(), title }
-    let todos = await getTodos()
+    let todos = JSON.parse(localStorage.getItem('todos'))
     todos.unshift(todo)
-    set(todos)
+    await fetch('https://jsonplaceholder.typicode.com/todos', {
+        method: 'POST',
+        body: JSON.stringify(todo),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }).then((response) => {
+        if (response.status == 201) {
+            set(todos)
+        } else {
+            alert(`Server response status: ${response.status} !`)
+        }
+    })
     return todo
+}
+
+export async function deleteTodo(id) {
+    let todos = await JSON.parse(localStorage.getItem('todos'))
+    let index = todos.findIndex(todo => todo.id == id)
+    if (index > -1) {
+        todos.splice(index, 1)
+        await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+            method: 'DELETE',
+          }).then((response) => {
+            if (response.status == 200) {
+                set(todos)
+            } else {
+                alert(`Server response status: ${response.status} !`)
+            }
+        })
+        return true
+    }
+    return false
 }
 
 const set = (todos) => {

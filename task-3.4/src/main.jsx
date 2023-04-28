@@ -14,6 +14,8 @@ import Users, { loader as usersLoader, action as usersAction } from './component
 import Post, { loader as postLoader } from './components/PostsList/Post'
 import { action as deleteAction } from './components/PostsList/Delete'
 import EditPost, { action as editAction} from './components/PostsList/Edit'
+import { action as deleteTodoAction} from './components/TodoList/DeleteTodo'
+import EditTodo from './components/TodoList/EditTodo'
 
  
 const router = createBrowserRouter([
@@ -34,18 +36,6 @@ const router = createBrowserRouter([
         action: postsAction,
       },
       {
-        path: 'todos',
-        element: <Todos />,
-        loader: todosLoader,
-        action: todosAction,
-      },
-      {
-        path: 'users',
-        element: <Users />,
-        loader: usersLoader,
-        action: usersAction,
-      },
-      {
         path: 'posts/:postId',
         element: <Post />,
         loader: postLoader,
@@ -59,6 +49,28 @@ const router = createBrowserRouter([
         element: <EditPost />,
         loader: postLoader,
         action: editAction,
+      },
+      {
+        path: 'todos',
+        element: <Todos />,
+        loader: todosLoader,
+        action: todosAction,
+        children: [
+          {
+            path: ':todoId/edit',
+            element: <EditTodo />
+          }
+        ]
+      },
+      {
+        path:'todos/:todoId/delete',
+        action: deleteTodoAction,
+      },
+      {
+        path: 'users',
+        element: <Users />,
+        loader: usersLoader,
+        action: usersAction,
       },
     ],
   },
