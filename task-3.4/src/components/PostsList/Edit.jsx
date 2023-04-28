@@ -1,4 +1,4 @@
-import { Form, useLoaderData, redirect } from 'react-router-dom'
+import { Form, useLoaderData, redirect, useNavigate } from 'react-router-dom'
 import { updatePost } from '../../posts'
 
 export async function action({ request, params }) {
@@ -10,6 +10,7 @@ export async function action({ request, params }) {
 
 export default function EditPost() {
     const { post } = useLoaderData()
+    const navigate = useNavigate()
 
     return (
         <div className='container'>
@@ -24,7 +25,11 @@ export default function EditPost() {
                 <textarea required minLength={20} name="body" defaultValue={post.body} rows={6} placeholder='Better not more than 150 words' />
                 <div className="form-edit__buttons">
                     <button className='edit-form__save' type='submit'>Save</button>
-                    <button className='edit-form__cancel' type='button'>Cancel</button>
+                    <button className='edit-form__cancel' type='button'
+                    onClick={() => {
+                        navigate(-1)
+                    }}
+                    >Cancel</button>
                 </div>
             </Form>
         </div>
