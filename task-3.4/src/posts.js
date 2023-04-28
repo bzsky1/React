@@ -12,6 +12,8 @@ const fetchData = async () => {
     const posts = await res.json()
     const shortPosts = posts.splice(0, 7)
     shortPosts.map((post) => {
+        delete post.userId
+        post.createdAt = Date.now()
         post.title = bigFirstLetter(post.title)
         post.title = post.title.slice(0, 20)
         post.picture = 'http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png'
@@ -21,62 +23,97 @@ const fetchData = async () => {
 }
 
 export async function getPosts(query) {
-    let posts = await fetchData()
-    if (!posts) posts = []
-    if (query) {
-        posts = matchSorter(posts, query)
+    let posts = await JSON.parse(localStorage.getItem('posts'))
+    if (posts === null) {
+        let posts = await fetchData()
+        if (!posts) posts = []
+        if (query) {
+            posts = matchSorter(posts, query)
+        }
+        set(posts)
     }
-    await set(posts)
-    return posts.sort(sortBy('createdAt'))
+    return posts.sort((a, b) => {
+        return b.createdAt - a.createdAt
+    })
 }
 
 export async function createPost() {
     let id = Math.random().toString(36).substring(3,9)
-    let title = 'Random post'
-    let sub = 'Subtitle'
-    let body = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa qui quis atque, ducimus saepe error laborum! Qui corporis debitis enim inventore. Tenetur voluptas similique repudiandae, omnis aut temporibus quasi in laboriosam dolore labore eos? Ad, explicabo saepe totam nihil cum magni obcaecati, praesentium quaerat minus, magnam adipisci labore? Vero, placeat?'
+    let title = ''
+    let sub = ''
+    let body = ''
     let picture = 'http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png'
     let post = { id, createdAt: Date.now(), title, sub, body, picture }
-    let posts = await localforage.getItem('posts')
+    let posts = JSON.parse(localStorage.getItem('posts'))
     posts.unshift(post)
     await fetch('https://jsonplaceholder.typicode.com/posts', {
         method: 'POST',
-        body: JSON.stringify(posts),
+        body: JSON.stringify(post),
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
-      })
-    await set(posts)
-    console.log('test')
+      }).then((response) => {
+        if (response.status == 201) {
+            set(posts)
+        } else {
+            alert(`Server response status: ${response.status} !`)
+        }
+    })
     return post
 }
 
-// export async function getPost(id) {
-//     let posts = await localforage.getItem('posts')
-//     let post = posts.find(post => post.id === id)
-//     return post ?? null
-// }
+export async function getPost(id) {
+    let posts = await JSON.parse(localStorage.getItem('posts'))
+    let post = posts.find((post) => {
+        return post.id == id
+    })
+    return post ?? null
+}
 
-// export async function updatePost(id, updates) {
-//     let posts = await localforage.getItem('posts')
-//     let post = posts.find(post => post.id === id)
-//     if (!post) throw new Error('No post found for', id)
-//     Object.assign(post, updates)
-//     await set(posts)
-//     return post
-// }
+export async function updatePost(id, updates) {
+    let posts = await JSON.parse(localStorage.getItem('posts'))
+    let post = posts.find(post => post.id == id)
+    if (!post) throw new Error('No post found for', id)
+    Object.assign(post, updates)
+    console.log(post, updates)
+    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            post
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    }).then((response) => {
+        if (response.status == 200) {
+            set(posts)
+        } else {
+            alert(`Server response status: ${response.status} !`)
+        }
+    })
+    set(posts)
+    return post
+}
 
-// export async function deletePost(id) {
-//     let posts = await localforage.getItem('posts')
-//     let index = posts.findIndex(post => post.id === id)
-//     if (index > -1) {
-//         posts.splice(index, 1)
-//         await set(posts)
-//         return true
-//     }
-//     return false
-// }
+export async function deletePost(id) {
+    let posts = await JSON.parse(localStorage.getItem('posts'))
+    let index = posts.findIndex(post => post.id == id)
+    if (index > -1) {
+        posts.splice(index, 1)
+        await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+            method: 'DELETE',
+          }).then((response) => {
+            if (response.status == 200) {
+                set(posts)
+            } else {
+                alert(`Server response status: ${response.status} !`)
+            }
+        })
+        return true
+    }
+    return false
+}
 
 const set = (posts) => {
-    return localforage.setItem('posts', posts)
+    return localStorage.setItem('posts', JSON.stringify(posts))
 }

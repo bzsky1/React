@@ -23,7 +23,7 @@ export async function getTodos(query) {
     if (query) {
         todos = matchSorter(todos, query)
     }
-    await set(todos)
+    set(todos)
     return todos.sort(sortBy('createdAt'))
 }
 
@@ -33,10 +33,10 @@ export async function createTodo() {
     let todo = { id, createdAt: Date.now(), title }
     let todos = await getTodos()
     todos.unshift(todo)
-    await set(todos)
+    set(todos)
     return todo
 }
 
 const set = (todos) => {
-    return localforage.setItem('todos', todos)
+    return localStorage.setItem('todos', JSON.stringify(todos))
 }

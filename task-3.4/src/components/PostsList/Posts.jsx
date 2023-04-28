@@ -1,4 +1,4 @@
-import { useLoaderData, Form } from "react-router-dom"
+import { useLoaderData, Form, Link, redirect } from "react-router-dom"
 import { getPosts, createPost } from "../../posts"
 
 export async function loader() {
@@ -8,7 +8,7 @@ export async function loader() {
 
 export async function action() {
     const post = await createPost()
-    return { post }
+    return redirect(`${post.id}/edit`)
 }
 
 export default function Posts() {
@@ -24,18 +24,18 @@ export default function Posts() {
                     {posts.length ? (
                         posts.map((post) => {
                             return (
-                            <div className="post" key={post.id}>
+                            <div className="post" key={ post.id }>
                                 <div className="post__pic">
-                                    <img src={post.picture}/>
+                                    <img src={ post.picture }/>
                                 </div>
                                 <div className="post__main">
                                     <div className="post__title"> { post.title } </div>
                                     <div className="post__sub"> { post.sub } </div>
                                     <div className="post__text"> { post.body } </div>
                                     <div className="buttons">
-                                        <button type='button' className="open-button">Open</button>
-                                        <button type="button" className="edit-button">Edit</button>
-                                        <button type='button' className="delete-button">Delete</button>
+                                        <Link to={`${post.id}`}><button type='button' className="open-button">Open</button></Link>
+                                        <Link to={`${post.id}/edit`}><button type="button" className="edit-button">Edit</button></Link>
+                                        <Form method="post" action={`${post.id}/delete`}><button type='submit' className="delete-button">Delete</button></Form>
                                     </div>
                                 </div>
                             </div>)

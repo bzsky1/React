@@ -8,6 +8,7 @@ const fetchData = async () => {
     users.map((user) => {
         user.avatar = 'http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png'
     })
+    set(users)
     return users
 }
 
@@ -28,10 +29,10 @@ export async function createUser() {
     let user = { id, createdAt: Date.now(), name, info, avatar }
     let users = await getUsers()
     users.unshift(user)
-    await set(users)
+    set(users)
     return user
 }
 
 const set = (users) => {
-    return localforage.setItem('users', users)
+    return localStorage.setItem('users', JSON.stringify(users))
 }

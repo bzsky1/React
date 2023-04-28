@@ -7,9 +7,12 @@
 }
 
 body {
-  font-family: 'Reenie Beanie', cursive;
   transition: all 0.5s ease;
+  font-family: 'Mali', cursive;
+}
 
+input, textarea {
+  font-family: 'Mali', cursive;
 }
 
 a {
@@ -19,6 +22,7 @@ a {
 }
 
 .header {
+  font-family: 'Reenie Beanie', cursive;
   height: 100px;
   background-color: #fff2a0;
   border-bottom: 3px solid rgb(202, 202, 202);
@@ -62,7 +66,6 @@ a {
 /* posts and some todos, ussers */
 
 .posts, .todos, .users {
-  font-family: 'Mali', cursive;
   text-align: center;
 }
 
@@ -81,8 +84,7 @@ a {
   padding: 20px;
   margin-bottom: 50px;
   border-right: 1px solid;
-
-
+  width: 800;
 }
 
 
@@ -97,6 +99,7 @@ a {
 .post__main {
   display: flex;
   flex-direction: column;
+  width: 600px;
 }
 
 .post__title {
@@ -112,19 +115,21 @@ a {
 
 .post__text {
   font-size: 14px;
+  width: 100%;
 }
 
 .buttons {
+  display: flex;
   align-self: center;
   margin-top: 20px;
-  margin-right: 150px;
+  margin-right: 140px;
 }
 
 .buttons button {
   width: 65px;
 }
 
-.posts button, .todos button, .users button {
+.posts button, .todos button, .users button, .form-edit__buttons button {
   font-family: 'Mali', cursive;
   background-color: inherit;
   padding: 6px 8px;
@@ -135,7 +140,8 @@ a {
 .open-button:hover, 
 .new-post__button:hover, 
 .new-todo__button:hover, 
-.new-user__button:hover {
+.new-user__button:hover,
+.edit-form__save:hover {
   background-color: #9eff95;
 }
 
@@ -151,7 +157,8 @@ a {
 
 .delete-button:hover, 
 .todo-item__delete-btn:hover,
-.user-item__delete-btn:hover {
+.user-item__delete-btn:hover,
+.edit-form__cancel:hover {
   background-color: #ff5f5f;
 }
 
@@ -252,4 +259,70 @@ a {
 
 .users {
   margin-bottom: 30px;
+}
+
+/* _______________________________________________________________ */
+/* post */
+
+.p__main {
+  margin-bottom: 50px;
+}
+
+.p__img {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.p__img img {
+  height: 400px;
+}
+
+.p__title {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.p__sub {
+  margin-bottom: 30px;
+  color: grey;
+}
+
+/* _______________________________________________________________ */
+/* edit post */
+
+.edit-form h1 {
+  font-size: 18px;
+  font-weight: normal;
+  border-left: 2px solid #ffe647;
+  padding-left: 10px;
+  width: 400px;
+}
+
+input:focus, textarea:focus {
+  outline: 2px solid #ffe647;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-form input,.edit-form textarea  {
+ border-radius: 7px;
+ border: 0.5px solid;
+ padding: 5px 10px;
+ width: 400px;
+ margin: 10px 0 30px 0;
+
+}
+
+.form-edit__buttons {
+  width: 160px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-edit__buttons button {
+  width: 70px;
 }
