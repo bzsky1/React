@@ -13,9 +13,14 @@ import Todos, { loader as todosLoader, action as todosAction} from './components
 import Users, { loader as usersLoader, action as usersAction } from './components/UserList/Users'
 import Post, { loader as postLoader } from './components/PostsList/Post'
 import { action as deleteAction } from './components/PostsList/Delete'
-import EditPost, { action as editAction} from './components/PostsList/Edit'
-import { action as deleteTodoAction} from './components/TodoList/DeleteTodo'
-import EditTodo from './components/TodoList/EditTodo'
+import EditPost, { action as editAction } from './components/PostsList/Edit'
+import { action as deleteTodoAction } from './components/TodoList/DeleteTodo'
+import EditTodo, { loader as todoLoader, action as todoEditAction } from './components/TodoList/EditTodo'
+import CreatePost, { action as createPostAction } from './components/PostsList/Create'
+import CreateTodo, { action as crateTodoAction } from './components/TodoList/CreateTodo'
+import { action as deleteUserAction } from './components/UserList/DeleteUser'
+import { CreateUser, action as createUserAction } from './components/UserList/CreateUser'
+import { EditUser, loader as userLoader, action as userAction } from './components/UserList/EditUser'
 
  
 const router = createBrowserRouter([
@@ -51,6 +56,11 @@ const router = createBrowserRouter([
         action: editAction,
       },
       {
+        path: 'posts/create',
+        element: <CreatePost />,
+        action: createPostAction,
+      },
+      {
         path: 'todos',
         element: <Todos />,
         loader: todosLoader,
@@ -58,8 +68,15 @@ const router = createBrowserRouter([
         children: [
           {
             path: ':todoId/edit',
-            element: <EditTodo />
-          }
+            element: <EditTodo />,
+            loader: todoLoader,
+            action: todoEditAction,
+          },
+          {
+            path: 'create',
+            element: <CreateTodo />,
+            action: crateTodoAction,
+          },
         ]
       },
       {
@@ -71,6 +88,23 @@ const router = createBrowserRouter([
         element: <Users />,
         loader: usersLoader,
         action: usersAction,
+        children: [
+          {
+            path: 'create',
+            element: <CreateUser />,
+            action: createUserAction,
+          },
+          {
+            path: ':userId/edit',
+            element: <EditUser />,
+            loader: userLoader,
+            action: userAction,
+          },
+        ]
+      },
+      {
+        path: 'users/:userId/delete',
+        action: deleteUserAction,
       },
     ],
   },

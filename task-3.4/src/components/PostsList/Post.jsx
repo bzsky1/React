@@ -13,17 +13,18 @@ const bigFirstLetter = (str) => {
 
 export default function Post() {
     const { post } = useLoaderData()
+    const { picture, title, sub, body } = post
 
     return (
         <div className="P">
             <div className="container">
                 <div className="p__main">
                     <div className="p__img">
-                        <img src={ post.picture }/>
+                        <img src={ picture }/>
                     </div>
-                    <div className="p__title"> { post.title } </div>
-                    <div className="p__sub"> { post.sub } </div>
-                    <div className="p__text"> { bigFirstLetter(post.body) } </div>
+                    <div className="p__title"> { bigFirstLetter(title) } </div>
+                    <div className="p__sub"> { sub } </div>
+                    <div className="p__text"> { bigFirstLetter(body) } </div>
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
-import { useLoaderData, Form, Outlet, Link } from "react-router-dom";
-import { createTodo, getTodos } from "../../todos";
+import { useLoaderData, Form, Outlet, Link, redirect } from "react-router-dom";
+import { getTodos } from "../../todos";
 
 export async function loader() {
     const todos = await getTodos();
@@ -7,8 +7,8 @@ export async function loader() {
 };
 
 export async function action() {
-    const todo = await createTodo();
-    return { todo };
+    document.querySelector('.edit-todo-outlet').classList.add('edit-todo-active')
+    return redirect('create');
 };
 
 export default function Todos() {

@@ -1,5 +1,5 @@
 import { useLoaderData, Form, Link, redirect } from "react-router-dom"
-import { getPosts, createPost } from "../../posts"
+import { getPosts } from "../../posts"
 
 export async function loader() {
     const posts = await getPosts()
@@ -7,9 +7,13 @@ export async function loader() {
 }
 
 export async function action() {
-    const post = await createPost()
-    return redirect(`${post.id}/edit`)
+    return redirect(`create`)
 }
+
+const bigFirstLetter = (str) => {
+    if (!str) return str;
+    return str[0].toUpperCase() + str.slice(1);
+};
 
 export default function Posts() {
     const { posts } = useLoaderData()
@@ -29,9 +33,9 @@ export default function Posts() {
                                     <img src={ post.picture }/>
                                 </div>
                                 <div className="post__main">
-                                    <div className="post__title"> { post.title } </div>
+                                    <div className="post__title"> { bigFirstLetter(post.title) } </div>
                                     <div className="post__sub"> { post.sub } </div>
-                                    <div className="post__text"> { post.body } </div>
+                                    <div className="post__text"> { bigFirstLetter(post.body) } </div>
                                     <div className="buttons">
                                         <Link to={`${post.id}`}><button type='button' className="open-button">Open</button></Link>
                                         <Link to={`${post.id}/edit`}><button type="button" className="edit-button">Edit</button></Link>

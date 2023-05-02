@@ -1,6 +1,4 @@
-import localforage from "localforage";
 import { matchSorter } from "match-sorter";
-import sortBy from "sort-by";
 
 const bigFirstLetter = (str) => {
     if (!str) return str;
@@ -35,11 +33,11 @@ export async function getTodos(query) {
     })
 }
 
-export async function createTodo() {
+export async function createTodo(newTodo) {
     let id = Math.random().toString(36).substring(3,9)
-    let title = 'Random Todo'
+    let title = newTodo.title
     let todo = { id, createdAt: Date.now(), title }
-    let todos = JSON.parse(localStorage.getItem('todos'))
+    let todos = await JSON.parse(localStorage.getItem('todos'))
     todos.unshift(todo)
     await fetch('https://jsonplaceholder.typicode.com/todos', {
         method: 'POST',
@@ -54,6 +52,40 @@ export async function createTodo() {
             alert(`Server response status: ${response.status} !`)
         }
     })
+    return todo
+}
+
+export async function getTodo(id) {
+    let todos = await JSON.parse(localStorage.getItem('todos'))
+    let todo = todos.find((todo) => {
+        return todo.id == id
+    })
+    return todo ?? null
+}
+
+export async function updateTodo(id, updates) {
+    let todos = await JSON.parse(localStorage.getItem('todos'))
+    let todo = todos.find((todo) => {
+        return todo.id == id
+    })
+    Object.assign(todo, updates)
+    await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+            todo
+        }),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+        },
+    }).then((response) => {
+        if (response.status == 200) {
+            set(todos)
+        } else {
+            alert(`Server response status: ${response.status} !`)
+        }
+    })
+    document.querySelector('.edit-todo-outlet').classList.remove('edit-todo-active')
+    set(todos)
     return todo
 }
 

@@ -1,11 +1,4 @@
-import localforage from "localforage";
 import { matchSorter } from "match-sorter";
-import sortBy from "sort-by";
-
-const bigFirstLetter = (str) => {
-    if (!str) return str;
-    return str[0].toUpperCase() + str.slice(1);
-};
 
 const fetchData = async () => {
     const res = await fetch('https://jsonplaceholder.typicode.com/posts')
@@ -14,7 +7,6 @@ const fetchData = async () => {
     shortPosts.map((post) => {
         delete post.userId
         post.createdAt = Date.now()
-        post.title = bigFirstLetter(post.title)
         post.title = post.title.slice(0, 20)
         post.picture = 'http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png'
         post.sub = 'test_test_test'
@@ -37,12 +29,12 @@ export async function getPosts(query) {
     })
 }
 
-export async function createPost() {
+export async function createPost(newPost) {
     let id = Math.random().toString(36).substring(3,9)
-    let title = 'Random post'
-    let sub = 'Subtitle'
-    let body = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa qui quis atque, ducimus saepe error laborum! Qui corporis debitis enim inventore. Tenetur voluptas similique repudiandae, omnis aut temporibus quasi in laboriosam dolore labore eos? Ad, explicabo saepe totam nihil cum magni obcaecati, praesentium quaerat minus, magnam adipisci labore? Vero, placeat?'
-    let picture = 'http://www.hotavatars.com/wp-content/uploads/2019/01/I80W1Q0.png'
+    let title = newPost.title
+    let sub = newPost.sub
+    let body = newPost.body
+    let picture = newPost.picture
     let post = { id, createdAt: Date.now(), title, sub, body, picture }
     let posts = JSON.parse(localStorage.getItem('posts'))
     posts.unshift(post)
