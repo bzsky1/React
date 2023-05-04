@@ -69,7 +69,7 @@ const Completed = ({ todo }) => {
     };
 
     return (
-        <fetcher.Form method="post">
+        <fetcher.Form method="post" action={`${todo.id}/complete`}>
             <button
             className={`todo__completed-btn`}
             name="completed"

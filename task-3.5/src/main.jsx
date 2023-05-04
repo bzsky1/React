@@ -21,6 +21,7 @@ import CreateTodo, { action as crateTodoAction } from './components/TodoList/Cre
 import { action as deleteUserAction } from './components/UserList/DeleteUser'
 import { CreateUser, action as createUserAction } from './components/UserList/CreateUser'
 import { EditUser, loader as userLoader, action as userAction } from './components/UserList/EditUser'
+import { action as completeTodoAction } from './components/TodoList/CompleteTodo'
 
  
 const router = createBrowserRouter([
@@ -64,7 +65,7 @@ const router = createBrowserRouter([
         path: 'todos',
         element: <Todos />,
         loader: todosLoader,
-        action: todosAction,
+        // action: todosAction,
         children: [
           {
             path: ':todoId/edit',
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
             path: 'create',
             element: <CreateTodo />,
             action: crateTodoAction,
+          },
+          {
+            path: ':todoId/complete',
+            action: completeTodoAction,
           },
         ]
       },
