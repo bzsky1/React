@@ -1,4 +1,5 @@
 import { matchSorter } from "match-sorter";
+import { redirect } from "react-router-dom";
 
 const fetchData = async () => {
     const res = await fetch('https://jsonplaceholder.typicode.com/posts')

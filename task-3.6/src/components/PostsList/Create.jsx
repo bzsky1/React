@@ -2,11 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { createPost } from '../../posts';
 import { useForm } from 'react-hook-form';
 
-const redirectFunc = async (data) => {
-    await createPost(data);
-    window.location.href = '/posts';
-};
-
 export default function CreatePost() {
     const navigate = useNavigate();
     const { register, handleSubmit, formState:{ errors } } = useForm();
@@ -14,7 +9,10 @@ export default function CreatePost() {
     return (
         <div className='container'>
             <form className='edit-form' onSubmit={handleSubmit((data) => {
-                redirectFunc(data);
+                createPost(data);
+                setTimeout(() => {
+                    navigate(-1);
+                }, 1000);
             })}>
                 <h1>Post title</h1>
                 <input type="text" {...register("title", { required: 'This is required!' })} placeholder='Enter title of your post' />
