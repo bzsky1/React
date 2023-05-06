@@ -15,7 +15,10 @@ export default function CreatePost() {
                 }, 1000);
             })}>
                 <h1>Post title</h1>
-                <input type="text" {...register("title", { required: 'This is required!' })} placeholder='Enter title of your post' />
+                <input type="text" {...register("title", { required: 'This is required!', maxLength: {
+                    value: 40,
+                    message: 'Max length is 40 characters!'
+                } })} placeholder='Enter title of your post' />
                 <p className='create-post-required-text'>{errors.title?.message}</p>
                 <h1>Post picture URL</h1>
                 <input type="text" {...register("picture", { required: 'This is required!' })}  placeholder='https://example.com/picture.jpg' />
