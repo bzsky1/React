@@ -236,6 +236,7 @@ a {
 }
 
 .edit-todo-form, .edit-user-form {
+  margin-top: -50px;
   border-radius: 20px;
   width: 400px;
   margin-left: 200px;
@@ -449,10 +450,6 @@ input:focus, textarea:focus {
 /* _______________________________________________________________ */
 /* user */
 
-/* .user-page {
-  height: 470px;
-  margin-top: 3%;
-} */
 
 .user-page__main-block svg {
   margin-right: 3px;
@@ -466,6 +463,7 @@ input:focus, textarea:focus {
   margin: 0 auto;
   border: 2px solid;
   border-radius: 30px;
+  margin-top: -50px;
 }
 
 .user-page__info {
