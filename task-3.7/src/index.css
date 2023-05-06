@@ -227,16 +227,16 @@ a {
   top: 0px;
   background-color: rgba(77, 77, 77, 0.47);
   display: none;
-
+  justify-content: center;
+  align-items: center;
 }
 
 .edit-todo-active {
-  display: block;
+  display: flex;
 }
 
 .edit-todo-form, .edit-user-form {
   border-radius: 20px;
-  margin-top: 15vh;
   width: 400px;
   margin-left: 200px;
   height: 200px;
@@ -449,13 +449,18 @@ input:focus, textarea:focus {
 /* _______________________________________________________________ */
 /* user */
 
+/* .user-page {
+  height: 470px;
+  margin-top: 3%;
+} */
+
 .user-page__main-block svg {
   margin-right: 3px;
 }
 
 .user-page__main-block {
   background-color: #fff;
-  height: 65vh;
+  height: 470px;
   padding: 30px 80px;
   width: 400px;
   margin: 0 auto;
@@ -479,7 +484,7 @@ input:focus, textarea:focus {
 }
 
 .margin {
-  /* margin-left: -40px; */
+  margin-left: -40px;
 
 }
 
@@ -488,7 +493,7 @@ input:focus, textarea:focus {
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
-  margin-left: -32px;
+  margin-left: -64px;
 }
 
 .user-page__name {
@@ -508,5 +513,5 @@ input:focus, textarea:focus {
 
 .user-page__close svg {
   cursor: pointer;
-  margin-left: 35px;
+  /* margin-left: 35px; */
 }
